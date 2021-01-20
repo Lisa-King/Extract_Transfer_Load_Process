@@ -1,3 +1,4 @@
+-- Populate all records into dimension table and the suurogate key would be auto_incremented;
 INSERT INTO DIMDATE (DATETIME_SKEY)
 SELECT f.DATETIME
 FROM DIMDATE_DLT f
@@ -26,4 +27,4 @@ LEFT JOIN DIMVIDEO t
 ON f.VIDEO = t.VIDEO
 WHERE t.VIDEO IS NULL;
 
-commit;
+COMMIT;

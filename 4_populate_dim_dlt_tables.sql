@@ -1,25 +1,32 @@
---transfer datetime into minite grain format, like '202001011521'
+-- transfer datetime into minite grain format, like '202001011521'
 INSERT INTO DIMDATE_DLT
 SELECT DATE_FORMAT(DATETIME,'%Y%m%d%H%i')
 FROM VIDEOSTART_DLT
 GROUP BY DATE_FORMAT(DATETIME,'%Y%m%d%H%i')
 ORDER BY DATE_FORMAT(DATETIME,'%Y%m%d%H%i');
 
---All disctinct platform values populated into DIMPLATFORM_DLT table;
+-- All disctinct platform values populated into DIMPLATFORM_DLT table;
+--SELECT PLATFORM
+--FROM VIDEOSTART_DLT
+--GROUP BY PLATFORM
+--ORDER BY PLATFORM;
+--This SQL script is same with below:
+--SELECT DISTINCT(PLATFORM) FROM VIDEOSTART_DLT; 
+
 INSERT INTO DIMPLATFORM_DLT
 SELECT PLATFORM
 FROM VIDEOSTART_DLT
 GROUP BY PLATFORM
 ORDER BY PLATFORM;
 
---All disctinct site values populated into DIMSITE_DLT table;
+-- All disctinct site values populated into DIMSITE_DLT table;
 INSERT INTO DIMSITE_DLT
 SELECT SITE
 FROM VIDEOSTART_DLT
 GROUP BY SITE
 ORDER BY SITE;
 
---All disctinct video values populated into DIMVIDEO_DLT table;
+-- All disctinct video values populated into DIMVIDEO_DLT table;
 INSERT INTO DIMVIDEO_DLT
 SELECT VIDEO
 FROM VIDEOSTART_DLT
